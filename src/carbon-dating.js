@@ -16,8 +16,10 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('1') => 22387
  * dateSample('WOOT!') => false
  *
+ * HALF_LIFE_PERIOD / Math.LN2 * - постоянная распада
  */
-export default function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function dateSample(sampleActivity) {
+  if (isNaN(parseFloat(sampleActivity)) || sampleActivity <= 0 || sampleActivity >= 15 || typeof sampleActivity !== 'string') {
+    return false;
+  } else { return (Math.ceil((HALF_LIFE_PERIOD / Math.LN2) * (Math.log(MODERN_ACTIVITY / parseFloat(sampleActivity)))));}
 }
