@@ -21,8 +21,47 @@ import { NotImplementedError } from '../extensions/index.js';
  *   '.ru.yandex.music': 1,
  * }
  *
- */
-export default function getDNSStats(/* domains */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ */// for (let i = 0; i < domains.length; i++) {
+export default function getDNSStats(domains) {
+  let result = {};
+  domains.map((el) => el.split('.').reverse().reduce((acc, el) => {
+      let temp = `${acc}.${el}`;
+      result[temp] = result[temp] + 1 || 1;
+      return temp;
+    }, ''));
+  return result;
 }
+//   const reducer = (acc, el) => {
+//     if (!acc[el.split('.')]) {
+//       acc[el.split('.')] = 1;
+//     } else {
+//       acc[el.split('.')] += 1;
+//     }
+//     return acc;
+//   }, {};
+// str.split('.).reverse().reduce()!!!!!!!!!
+//   const resultReducer = obj => obj.reduce((acc, el) => {
+//     if (!acc[el]) {
+//       acc[el] = 1;
+//     } else {
+//       acc[el] += 1;
+
+//     }
+//     return acc;
+//   }, {});
+//   return domains.reduce(reducer).reduce(resultReducer)
+
+//   }
+
+
+// reduce((acc, el) => {
+//   if (!acc[el]) {
+//     acc[el] = 1;
+//   } else {
+//     acc[el] += 1;
+
+//   }
+//   return acc;
+// }, {})
+
+
